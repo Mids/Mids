@@ -14,9 +14,35 @@ jobs:
       contents: write
   
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
       - uses: vn7n24fzkq/github-profile-summary-cards@release
         env:
           GITHUB_TOKEN: ${{ secrets.SUMMARY_CARD_TOKEN }}
         with:
           USERNAME: ${{ github.repository_owner }}
+          AUTO_PUSH: false
+
+      - name: Generate trophy
+        uses: Mids/github-profile-trophy@9246d666156d8c3243cb988a233894c336974dbf
+        with:
+          username: ${{ github.repository_owner }}
+          output_path: profile-trophy-output/trophy.svg
+          token: ${{ secrets.SUMMARY_CARD_TOKEN }}
+          theme: darkhub
+          row: "1"
+          column: "8"
+          no_bg: "true"
+          no_frame: "true"
+
+      - name: Commit generated profile assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile-summary-card-output profile-trophy-output
+          if git diff --cached --quiet; then
+            echo "No generated profile asset changes"
+          else
+            git commit -m "Update generated profile assets"
+            git push
+          fi

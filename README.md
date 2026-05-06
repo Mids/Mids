@@ -1,4 +1,4 @@
-![trophy](https://github-profile-trophy-tawny.vercel.app/?username=mids&row=1&column=8&no-bg=true&no-frame=true&theme=darkhub)
+![trophy](profile-trophy-output/trophy.svg)
 
 ![](profile-summary-card-output/github_dark/1-repos-per-language.svg)|![](profile-summary-card-output/github_dark/0-profile-details.svg)
 -|-
